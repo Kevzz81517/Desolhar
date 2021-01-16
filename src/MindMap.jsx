@@ -13,17 +13,9 @@ function MindMap(props) {
 
   const [mapData, setMapData] = useState(undefined);
 
-  const [height, setHeight] = useState(0);
-
-  const [originalHeight, setOriginalHeight] = useState(0);
-
-  const [width, setWidth] = useState(0);
-
   const [selectedDataNode, setSelectedDataNode] = useState(undefined);
 
   let { topicUrlKey } = useParams();
-
-  const zoomLevel = useStoreState((state) => state.transform[2]);
 
   useEffect(() => {
 
@@ -101,10 +93,6 @@ function MindMap(props) {
         }
       }
     })
-
-    setOriginalHeight(g._label.height)
-
-    setWidth(g._label.width)
         
     setMapData(graphElements);
 
@@ -113,9 +101,7 @@ function MindMap(props) {
 
 
     const onLoad = (graph) => {
-      graph.fitView();   
-      let height = originalHeight*zoomLevel > window.innerHeight ? originalHeight : window.innerHeight;
-      setHeight(height *zoomLevel*1/zoomLevel - 50);
+      setTimeout(() => graph.fitView())
     };
 
     return (
@@ -138,7 +124,7 @@ function MindMap(props) {
           mapData ? (
             <>
             
-            <Row style={{height: height, width: window.innerWidth, overflowX: 'auto'}} align='bottom'>
+            <Row style={{height: window.innerHeight - 50, width: window.innerWidth, overflowX: 'auto'}} align='bottom'>
             <ReactFlow
                 minZoom={0}
                 maxZoom={5}
@@ -148,7 +134,7 @@ function MindMap(props) {
                     if(!selectedDataNode || selectedDataNode.id !== element.id) {
                         setMapData(mapData.map(mapDataElement => {
                             return (
-                                mapDataElement.id === element.id ? 
+                                mapDataElement.id == element.id ? 
                                 {...mapDataElement, type: 'output'} : 
                                 {...mapDataElement, type: 'default'}
                             )
@@ -164,8 +150,25 @@ function MindMap(props) {
                 }}
                 nodeTypes={
                   {
-                    'default': (element) => { return (<div style={{ maxHeight: 200, overflowY: 'auto'}}>{element.data.level === 6 ? <Text>{element.data.label}</Text> : <Title level={element.data.level}>{element.data.label}</Title>}</div>) },
-                    'output': (element) => { return (<div style={{ maxHeight: 200, overflowY: 'auto'}}>{element.data.level === 6 ? <Text>{element.data.label}</Text> : <Title level={element.data.level}>{element.data.label}</Title>}</div>) },
+                    'default': (element) => { 
+                      return (
+                        element.data.level === 6 ? (
+                          <div style={{ maxHeight: 200, overflowY: 'auto', border: '1px black solid', backgroundColor: '#f0f0f0', cursor: 'pointer'}}>
+                            {<Text>{element.data.label}</Text>}
+                          </div>
+                        ) : (
+                          <div style={{ maxHeight: 200, overflowY: 'auto'}}>
+                            {<Title level={element.data.level}>{element.data.label}</Title>}
+                          </div>
+                        ))
+                      },
+                      'output': (element) => { 
+                        return (
+                          <div style={{ maxHeight: 200, overflowY: 'auto', border: '1px black solid', backgroundColor: '#f0f0f0', cursor: 'pointer'}}>
+                            {<Text>{element.data.label}</Text>}
+                          </div>
+                        )
+                      },
                   }
                 }
                 paneMoveable={true}
@@ -173,7 +176,7 @@ function MindMap(props) {
                 snapGrid={[8,24]}
                 draggable={false}
                 onLoad={onLoad}
-                zoomOnScroll={false}
+                zoomOnScroll={true}
                 zoomOnDoubleClick={true}
                 contentEditable={false}
                 nodesDraggable={false}

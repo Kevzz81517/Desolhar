@@ -6,6 +6,7 @@ export const topics = [
     data: { data: [] },
    },
    {
+    enabled: true,
     displayName : "Death",
     urlKey: "death",
     data: { 
@@ -19,11 +20,47 @@ export const topics = [
                         {
                             data: {
                                 label: "It makes life precious",
-                                level: 5
+                                level: 5,
+                                data: [
+                                    {
+                                        data: {
+                                            label: ' It is no hardship to be a slave, if, when a man can no longer bear his master’s yoke, he may with a single step pass to freedom. Life is thanks to death that you are precious in my eyes. (Death brings freedom from pain, death also enlightens the value of life)',
+                                            level: 6
+                                        },
+                                        
+                                    },
+                                ]
                             },
                         },
                         {
-                            data: {label: 'Death is rest', level: 5},
+                            data: {
+                                label: 'Death is rest', 
+                                level: 5,
+                                data: [
+                                    {
+                                        data: {
+                                            label: 'Death frees a man from slavery through his masks is unwilling: it makes light the choice of a prisoner; it leads out of prison those forbidden to leave by a tyrant’s power: it shows exile; whose eyes and minds turn away to their homeland, that it does not matter beneath whose soil a man may lie.',
+                                            level: 6
+                                        },
+                                        
+                                    },
+                                    {
+                                        data: {
+                                            label: 'Finally, he has come to rest in a place where nothing can drive him away, where nothing can make him afraid. (The afterlife)',
+                                            level: 6
+                                        },
+                                        
+                                    },
+                                    {
+                                        data: {
+                                            label: 'Death is a realize from all pains and a boundary beyond which our suffering cannot go: it returns us to the state of peacefulness in which we lay before we were born.',
+                                            level: 6,
+                                            type: 'output'
+                                        },
+                                        
+                                    },
+                                ]
+                            },
                         },
                         {
                             data: {
@@ -59,7 +96,7 @@ export const topics = [
                         {
                             data: {
                                 label: "Equality of Death",
-                                level: 5
+                                level: 5,
                             },
                         },
                         {
@@ -132,17 +169,6 @@ export const topics = [
                 },
             },
         ]
-        // {id: 'e1-2', source: '1', target: '2'},
-        // {id: 'e1-3', source: '1', target: '3'},
-        // {id: 'e1-4', source: '1', target: '4'},
-        
-        // {id: 'e3-11', source: '3', target: '11'},
-        // {id: 'e3-12', source: '3', target: '12'},
-        // {id: 'e3-13', source: '3', target: '13'},
-        // {id: 'e4-14', source: '4', target: '14'},
-        // {id: 'e4-15', source: '4', target: '15'},
-        // {id: 'e5-16', source: '5', target: '16'},
-        // {id: 'e5-17', source: '5', target: '17'},
     },
    },
    {

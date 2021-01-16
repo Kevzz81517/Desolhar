@@ -3,7 +3,8 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    Redirect
   } from "react-router-dom";
 import { elements } from './data';
 import MindMap from './MindMap';
@@ -17,6 +18,9 @@ function App(props) {
         <ReactFlowProvider>
         <Router forceRefresh={true}>
            <Switch>
+           <Route exact path="/">
+                <Redirect to="/topics" />
+            </Route>
             <Route exact path="/topics">
                 <Topic />
             </Route>
